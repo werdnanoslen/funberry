@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Face Tracker</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+
+    <h1>My Face Tracker</h1>
+
+    <div style="width: 100%">
+        <canvas id="something" </canvas>
+    </div>
+
+    <script>
+        var x;
+        var y;
+        var canvas;
+        var ctx;
+
+        window.onload = function() {
+            initGame();
+        }
+
+        var socket = io();
+
+        socket.on('center0', function(incomingData) {
+            console.log(incomingData);
+            x = incomingData[0];
+            y = incomingData[1];
+            updateGame();
+        });
+
+        var initGame = function() {
+            canvas = document.getElementById("something");
+            ctx = canvas.getContext("2d");
+            x = canvas.width / 2;
+            y = canvas.height / 2;
+            updateGame();
+        }
+
+        var updateGame = function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    </script>
+
+</body>
+
+</html>
