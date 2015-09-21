@@ -2,6 +2,8 @@ var app = require('http').createServer(handler);
 var io = require('socket.io')(app);
 var fs = require('fs');
 var cv = require('opencv');
+var ReadWriteLock = require('rwlock');
+var lock = new ReadWriteLock();
 
 function handler(req, res) {
     fs.readFile(__dirname + '/public/index.html',
@@ -47,25 +49,27 @@ io.on('connection', function(socket) {
             isDetecting = true;
             camera.read(function(err, im) {
                 if (err) throw err;
-                //im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {scale:1.2,minNeighbors:1,minSize:(20,20),maxSize:(100,100),haarFlags:0}, function(err, faces) {
-                im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {
-                    scale: 1.2,
-                    minNeighbors: 1,
-                    minSize: (20, 20),
-                    maxSize: (100, 100),
-                    haarFlags: 0
-                }, function(err, faces) {
-                    if (err) throw err;
-                    for (var i = 0; i < faces.length; i++) {
-                        face = faces[i];
-                        im.rectangle([face.x, face.y], [face.width, face.height], rectColor, rectThickness);
-                        console.log("Found a face at %d,%d with dimensions %d,%d", face.x, face.y, face.width, face.height);
-
-                        if (i == 0) {
-                            socket.emit('center0', [face.x, face.y]);
+                lock.writeLock(function (release) {
+                    //im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {scale:1.2,minNeighbors:1,minSize:(20,20),maxSize:(100,100),haarFlags:0}, function(err, faces) {
+                    im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {
+                        scale: 1.2,
+                        minNeighbors: 1,
+                        minSize: (20, 20),
+                        maxSize: (100, 100),
+                        haarFlags: 0
+                    }, function(err, faces, release) {
+                        if (err) throw err;
+                        release();
+                        for (var i = 0; i < faces.length; i++) {
+                            face = faces[i];
+                            im.rectangle([face.x, face.y], [face.width, face.height], rectColor, rectThickness);
+                            console.log("Found a face at %d,%d with dimensions %d,%d", face.x, face.y, face.width, face.height);
+                            if (i == 0) {
+                                socket.emit('center0', [face.x, face.y]);
+                            }
                         }
-                    }
-                    //socket.emit('frame', { buffer: im.toBuffer() });
+                        //socket.emit('frame', { buffer: im.toBuffer() });
+                    });
                 });
             });
             console.log("next interval");
