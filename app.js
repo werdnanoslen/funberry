@@ -48,7 +48,7 @@ io.on('connection', function(socket) {
             camera.read(function(err, im) {
                 if (err) throw err;
                 //im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {scale:1.2,minNeighbors:1,minSize:(20,20),maxSize:(100,100),haarFlags:0}, function(err, faces) {
-                im.detectObject('/home/pi/node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {
+                im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {
                     scale: 1.2,
                     minNeighbors: 1,
                     minSize: (20, 20),
