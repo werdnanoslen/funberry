@@ -59,7 +59,6 @@ io.on('connection', function(socket) {
                         haarFlags: 0
                     }, function(err, faces, release) {
                         if (err) throw err;
-                        release();
                         for (var i = 0; i < faces.length; i++) {
                             face = faces[i];
                             im.rectangle([face.x, face.y], [face.width, face.height], rectColor, rectThickness);
@@ -68,6 +67,7 @@ io.on('connection', function(socket) {
                                 socket.emit('center0', [face.x, face.y]);
                             }
                         }
+                        release();
                         //socket.emit('frame', { buffer: im.toBuffer() });
                     });
                 });
