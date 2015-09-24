@@ -3,8 +3,6 @@ var io = require('socket.io')(app);
 var fs = require('fs');
 var cv = require('opencv');
 var ReadWriteLock = require('rwlock');
-var phaser = require('phaser');
-var jquery = require('jquery');
 var lock = new ReadWriteLock();
 
 function handler(req, res) {
