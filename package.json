@@ -1,25 +1,26 @@
 {
-    "name": "funberry",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/werdnanoslen/funberry.git"
-    },
-    "author": "",
-    "license": "GPLv2",
-    "bugs": {
-        "url": "https://github.com/werdnanoslen/funberry/issues"
-    },
-    "homepage": "https://github.com/werdnanoslen/funberry",
-    "dependencies": {
-        "opencv": "^3.2.0",
-        "phaser": "^2.4.3",
-        "rwlock": "^5.0.0",
-        "socket.io": "^1.3.7"
-    }
+  "name": "funberry",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/werdnanoslen/funberry.git"
+  },
+  "author": "",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/werdnanoslen/funberry/issues"
+  },
+  "homepage": "https://github.com/werdnanoslen/funberry",
+  "dependencies": {
+    "express": "^4.13.3",
+    "opencv": "^3.2.0",
+    "phaser": "^2.4.3",
+    "rwlock": "^5.0.0",
+    "socket.io": "^1.3.7"
+  }
 }
