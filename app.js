@@ -57,7 +57,7 @@ io.on('connection', function(socket) {
                         minSize: (20, 20),
                         maxSize: (100, 100),
                         haarFlags: 0
-                    }, function(err, faces, release) {
+                    }, function(err, faces) {
                         if (err) throw err;
                         for (var i = 0; i < faces.length; i++) {
                             face = faces[i];
