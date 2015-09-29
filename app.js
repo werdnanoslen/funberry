@@ -1,25 +1,28 @@
-var app = require('http').createServer(handler);
+//var app = require('http').createServer(handler);
+var express = require('express');
+var app = express.createServer();
 var io = require('socket.io')(app);
 var fs = require('fs');
 var cv = require('opencv');
 var ReadWriteLock = require('rwlock');
 var lock = new ReadWriteLock();
 
-function handler(req, res) {
-    fs.readFile(__dirname + '/public/index.html',
-        function(err, data) {
-            res.writeHead(200);
-            res.end(data);
-        }
-    );
-    fs.readFile(__dirname + '/public/phaser.min.js',
-        function(err, data) {
-            res.writeHead(200);
-            res.end(data);
-        }
-    );
-    console.log("user connected");
-}
+app.use(express.static, __dirname + '/public');
+// function handler(req, res) {
+//     fs.readFile(__dirname + '/public/index.html',
+//         function(err, data) {
+//             res.writeHead(200);
+//             res.end(data);
+//         }
+//     );
+//     fs.readFile(__dirname + '/public/phaser.min.js',
+//         function(err, data) {
+//             res.writeHead(200);
+//             res.end(data);
+//         }
+//     );
+//     console.log("user connected");
+// }
 
 app.listen(8000);
 
