@@ -10,7 +10,14 @@ function handler(req, res) {
         function(err, data) {
             res.writeHead(200);
             res.end(data);
-        });
+        }
+    );
+    fs.readFile(__dirname + '/public/phaser.min.js',
+        function(err, data) {
+            res.writeHead(200);
+            res.end(data);
+        }
+    );
     console.log("user connected");
 }
 
