@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('express')();
 var io = require('socket.io');
 var fs = require('fs');
 var cv = require('opencv');
