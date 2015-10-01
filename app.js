@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-var io = require('socket.io')(app);
+var server = app.listen(8000);
+var io = require('socket.io')(server);
 var fs = require('fs');
 var cv = require('opencv');
 var ReadWriteLock = require('rwlock');
@@ -12,7 +13,6 @@ app.get('/', function(req, res){
     res.sendFile('phaser.min.js');
 });
 
-app.listen(8000);
 
 var isDetecting = false;
 
