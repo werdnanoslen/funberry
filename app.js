@@ -11,6 +11,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res){
     res.sendFile('index.html');
     res.sendFile('phaser.min.js');
+    res.sendFile('balloon.png');
 });
 
 
