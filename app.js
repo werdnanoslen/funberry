@@ -1,12 +1,16 @@
-var express = require('express')();
-var io = require('socket.io');
+var express = require('express');
+var app = express();
+var io = require('socket.io')(app);
 var fs = require('fs');
 var cv = require('opencv');
 var ReadWriteLock = require('rwlock');
 var lock = new ReadWriteLock();
 
-var app = express.createServer();
 app.use(express.static(__dirname + '/public'));
+app.get('/', function(req, res){
+    res.sendFile('index.html');
+    res.sendFile('phaser.min.js');
+});
 
 app.listen(8000);
 
