@@ -137,8 +137,8 @@
 
         socket.on('center0', function(incomingData) {
             console.log(incomingData);
-            x = incomingData[0];
-            y = incomingData[1];
+            x = incomingData[0] * canvas.width;
+            y = incomingData[1] * canvas.height;
             updateGame();
         });
 
@@ -153,7 +153,7 @@
         var updateGame = function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.arc(x, y, 10, 0, Math.PI * 2);
             ctx.fill();
         }
     </script>
