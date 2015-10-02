@@ -45,9 +45,11 @@
                 };
             }, function(error) {
                 console.error('getUserMedia error: ', error);
+                init();
             });
         } else {
-            alert('getUserMedia() is not supported in your browser');
+            console.error('getUserMedia() is not supported in your browser');
+            init();
         }
 
         socket.on('center0', function(incomingData) {
