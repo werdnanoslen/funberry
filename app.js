@@ -50,7 +50,7 @@ io.on('connection', function(socket) {
                 if (err) throw err;
                 lock.writeLock(function (release) {
                     //im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', { // slower, more accurate
-                    im.detectObject('./node_modules/opencv/data/lbpcascade_frontalface.xml', { // faster, less accurate
+                    im.detectObject('/usr/local/share/OpenCV/lbpcascades/lbpcascade_frontalface.xml', { // faster, less accurate
                         scale: 1.2,
                         minNeighbors: 1,
                         minSize: (20, 20),
