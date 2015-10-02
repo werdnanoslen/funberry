@@ -49,8 +49,8 @@ io.on('connection', function(socket) {
             camera.read(function(err, im) {
                 if (err) throw err;
                 lock.writeLock(function (release) {
-                    //im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {scale:1.2,minNeighbors:1,minSize:(20,20),maxSize:(100,100),haarFlags:0}, function(err, faces) {
-                    im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', {
+                    //im.detectObject('./node_modules/opencv/data/haarcascade_frontalface_alt2.xml', { // slower, more accurate
+                    im.detectObject('/usr/local/share/OpenCV/lbpcascades/lbpcascade_frontalface.xml', { // faster, less accurate
                         scale: 1.2,
                         minNeighbors: 1,
                         minSize: (20, 20),
