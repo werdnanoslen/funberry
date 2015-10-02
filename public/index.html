@@ -20,7 +20,9 @@
     <script>
         // game variables
         var game, video, knocker, leftEmitter, rightEmitter;
+        var cameraX, cameraY;
         var knockerSpeed = 300;
+        var socket = io();
 
         // fallback canvas dimensions
         var canvasWidth = 800;
@@ -51,6 +53,12 @@
         } else {
             alert('getUserMedia() is not supported in your browser');
         }
+
+        socket.on('center0', function(incomingData) {
+            console.log(incomingData);
+            cameraX = incomingData[0] * canvasWidth;
+            cameraY = incomingData[1] * canvasHeight;
+        });
 
         function create() {
             // interactions
@@ -120,41 +128,10 @@
             } else {
                 knocker.body.velocity.setTo(0, 0);
             }
-        }
-    </script>
 
-    <script>
-        var x;
-        var y;
-        var canvas;
-        var ctx;
-
-        window.onload = function() {
-            initGame();
-        }
-
-        var socket = io();
-
-        socket.on('center0', function(incomingData) {
-            console.log(incomingData);
-            x = incomingData[0] * canvas.width;
-            y = incomingData[1] * canvas.height;
-            updateGame();
-        });
-
-        var initGame = function() {
-            canvas = document.getElementById("something");
-            ctx = canvas.getContext("2d");
-            x = canvas.width / 2;
-            y = canvas.height / 2;
-            updateGame();
-        }
-
-        var updateGame = function() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.beginPath();
-            ctx.arc(x, y, 10, 0, Math.PI * 2);
-            ctx.fill();
+            //camera controls
+            knocker.body.x = cameraX;
+            knocker.body.y = cameraY;
         }
     </script>
 
